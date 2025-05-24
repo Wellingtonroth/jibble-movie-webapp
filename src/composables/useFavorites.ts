@@ -1,30 +1,36 @@
 import { computed } from 'vue';
 import { useFavoritesStore } from '@/stores/favorites'
+import type { Movie } from '@/types/movie'
 
 export default function useFavorites(favoritesStore = useFavoritesStore()) {
-  interface Movie {
-    Title: string
-    Year: string
-    imdbID: string
+  const favorites = computed<Movie[]>(() => favoritesStore.favorites)
+  const isLoading = computed<boolean>(() => favoritesStore.isLoading)
+
+  const loadFavorites = (): void => {
+    try {
+      favoritesStore.loadFavorites()
+    } catch (error) {
+      console.error('Error loading favorites:', error)
+      throw error
+    }
   }
 
-  const favorites = computed(() => favoritesStore.favorites)
-
-  const loadFavorites = async () => {
-    await favoritesStore.loadFavorites()
-  }
-
-  const toggleFavorite = (movie: Movie) => {
-    favoritesStore.toggleFavorite(movie)
+  const toggleFavorite = (movie: Movie): void => {
+    try {
+      favoritesStore.toggleFavorite(movie)
+    } catch (error) {
+      console.error('Error toggling favorite:', error)
+      throw error
+    }
   }
   
-  const isFavorite = (movieId: string) => {
+  const isFavorite = (movieId: string): boolean => {
     return favoritesStore.isFavorite(movieId)
   }
 
   return {
     favorites,
-    
+    isLoading,
     loadFavorites,
     toggleFavorite,
     isFavorite
