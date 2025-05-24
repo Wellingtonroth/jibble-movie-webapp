@@ -1,22 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
+import FavoritesView from '../views/FavoritesView.vue'
+import HomeView from '../views/HomeView.vue'
 
-const routes: RouteRecordRaw[] = [
+const routes = [
   {
     path: '/',
-    name: 'home',
-    component: () => import('../views/HomeView.vue')
+    name: 'HomeView',
+    component: HomeView,
   },
   {
     path: '/favorites',
-    name: 'favorites',
-    component: () => import('../views/FavoritesView.vue')
+    name: 'FavoritesView',
+    component: FavoritesView,
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
-export default router 
+export default router;
