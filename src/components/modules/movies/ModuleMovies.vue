@@ -1,10 +1,14 @@
 <template>
-  <ModuleMovies />
+  <section>
+    <h1>Movies</h1>
+  </section>    
 </template>
 
 <script setup lang="ts">
-import ModuleMovies from '@/components/modules/movies/ModuleMovies.vue'
+
 </script>
 
+
 <style scoped lang="scss">
+
 </style>
