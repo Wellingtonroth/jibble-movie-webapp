@@ -7,6 +7,12 @@ export const useMoviesStore = defineStore('movies', () => {
   const movies = ref<Movie[]>([])
   const totalPages = ref<number>(0)
   const currentPage = ref<number>(1)
+  const searchQuery = ref<string>('')
+  const searchResults = ref<Movie[]>([])
+  const searchPage = ref<number>(1)
+  const searchTotalPages = ref<number>(0)
+  const searchIsLoading = ref<boolean>(false)
+  const moviesDisplayType = ref<string>('grid')
   const isLoading = ref<boolean>(false)
 
   const getAllMovies = async (page: number = 1) => {
@@ -54,13 +60,19 @@ export const useMoviesStore = defineStore('movies', () => {
     }
   }
 
+  const setDisplayType = (type: string) => {
+    moviesDisplayType.value = type;
+  };
+
   return {
     movies,
     totalPages,
     currentPage,
+    moviesDisplayType,
     isLoading,
     getAllMovies,
     searchMovies,
-    getMoviesByYear
+    getMoviesByYear,
+    setDisplayType,
   }
 })
