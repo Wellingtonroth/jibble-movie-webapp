@@ -12,13 +12,13 @@
     </div>
   </div>
   <EmptyState
-    v-if="!movies.length"
+    v-if="!data.length"
     title="No movies found"
     description="Try searching for a different movie or check your search term"
   />
   <div class="movies-cards" v-else-if="displayType === DisplayType.GRID">
     <MovieCard 
-      v-for="(movie, index) in movies" 
+      v-for="(movie, index) in data" 
       :key="movie.imdbID" 
       :movie="movie"
       :index="index"
@@ -27,7 +27,7 @@
   </div>
   <div class="movies-list" v-else>
     <MoviesList 
-      v-for="(movie, index) in movies" 
+      v-for="(movie, index) in data" 
       :key="movie.imdbID" 
       :movie="movie"
       :index="index"
@@ -45,8 +45,11 @@ import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display'
 import { Icon } from '@iconify/vue'
 import type { Movie } from '@/types/movie'
 
+const { data } = defineProps<{
+  data: Movie[],
+}>();
+
 const { 
-  movies,
   displayType,
   setDisplayType,
 } = useMovies();

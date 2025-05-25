@@ -1,41 +1,47 @@
 <template>
-  <section class="favorites-movies-section">
-    <div class="favorites-movies-section__header">
+  <section class="movies-section">
+    <div class="movies-section__header">
       <Header />
       <SearchInput 
         v-model="searchQuery" 
-        @search="searchMovies"
+        @search="handleSearch"
       />
     </div>
-    <MoviesDisplay />
+    <MoviesDisplay 
+      :data="favorites" 
+    />
   </section>    
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
-import MoviesDisplay from '@/components/modules/movies/MoviesDisplay.vue'
+import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
-import useMovies from '@/composables/useMovies'
+import useFavorites from '@/composables/useFavorites'
 
 const searchQuery = ref<string>('');
 
 const { 
-  movies, 
-  getAllMovies,
-} = useMovies();
+  favorites,
+  isLoading,
+  loadFavorites,
+  toggleFavorite,
+  isFavorite,
+} = useFavorites();
 
-const searchMovies = () => {
-  console.log(searchQuery.value)
+const handleSearch = () => {
+  // searchMovies(searchQuery.value);
+  console.log("entrei");
 };
 
 onMounted(() => {
-  getAllMovies()
+  loadFavorites()
 })
 </script>
 
 <style scoped lang="scss">
-.favorites-movies-section {
+.movies-section {
   padding: 20px;
 
   &__header {

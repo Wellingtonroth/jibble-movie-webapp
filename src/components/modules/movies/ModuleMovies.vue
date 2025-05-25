@@ -7,20 +7,23 @@
         @search="handleSearch"
       />
     </div>
-    <MoviesDisplay />
+    <MoviesDisplay 
+      :data="movies"
+    />
   </section>    
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
-import MoviesDisplay from '@/components/modules/movies/MoviesDisplay.vue'
+import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
 import useMovies from '@/composables/useMovies'
 
 const searchQuery = ref<string>('');
 
 const { 
+  movies,
   getAllMovies,
   searchMovies,
 } = useMovies();

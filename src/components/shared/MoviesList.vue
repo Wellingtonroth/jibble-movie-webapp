@@ -11,20 +11,31 @@
       <p class="movies-list__item-year">
         {{ movie.Year }}
       </p>
-      <button class="movies-list__item-favorite">
-        <Icon icon="mdi:heart" />
-      </button>
+      <FavoriteButton
+        :is-favorite="isMovieFavorite"
+        @update:is-favorite="handleToggleFavorite"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import FavoriteButton from './FavoriteButton.vue'
+import useFavorites from '@/composables/useFavorites'
 import type { Movie } from '@/types/movie'
-import { Icon } from '@iconify/vue'
 
 const { movie } = defineProps<{
   movie: Movie
-}>()
+}>();
+
+const { isFavorite, toggleFavorite } = useFavorites();
+
+const isMovieFavorite = computed<boolean>(() => isFavorite(movie.imdbID));
+
+const handleToggleFavorite = (): void => {
+  toggleFavorite(movie);
+};
 </script>
 
 <style scoped lang="scss">
@@ -79,13 +90,5 @@ const { movie } = defineProps<{
     padding-bottom: 2px;
     border-bottom: 1px solid #666;
   } 
-
-  &__item-favorite {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    min-width: 30px;
-    min-height: 30px;
-  }
 }
 </style>
