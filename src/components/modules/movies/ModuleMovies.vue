@@ -19,6 +19,7 @@ import SearchInput from '@/components/shared/SearchInput.vue'
 import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
 import useMovies from '@/composables/useMovies'
+import useFavorites from '@/composables/useFavorites'
 
 const searchQuery = ref<string>('');
 
@@ -28,13 +29,16 @@ const {
   searchMovies,
 } = useMovies();
 
+const { loadFavorites } = useFavorites();
+
 const handleSearch = () => {
   searchMovies(searchQuery.value);
 };
 
 onMounted(() => {
-  getAllMovies()
-})
+  getAllMovies();
+  loadFavorites();
+});
 </script>
 
 <style scoped lang="scss">

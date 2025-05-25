@@ -7,8 +7,8 @@
       />
       <div class="movie-card__favorite">
         <FavoriteButton
-          :is-favorite="isMovieFavorite"
-          @update:is-favorite="handleToggleFavorite"
+          :is-favorite-movie="isFavoriteMovie"
+          @isFavorite="handleToggleFavorite(movie)"
         />
       </div>
     </div>
@@ -35,9 +35,9 @@ const { movie } = defineProps<{
 
 const { isFavorite, toggleFavorite } = useFavorites();
 
-const isMovieFavorite = computed<boolean>(() => isFavorite(movie.imdbID));
+const isFavoriteMovie = computed<boolean>(() => isFavorite(movie.imdbID));
 
-const handleToggleFavorite = (): void => {
+const handleToggleFavorite = (movie: Movie): void => {
   toggleFavorite(movie);
 };
 </script>

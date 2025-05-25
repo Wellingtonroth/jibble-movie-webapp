@@ -1,11 +1,11 @@
 <template>
   <button 
     class="favorite-button"
-    :class="{ 'favorite-button--active': isFavorite }"
+    :class="{ 'favorite-button--active': isFavoriteMovie }"
     @click="toggleFavorite"
   >
     <Icon 
-      :icon="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'" 
+      :icon="isFavoriteMovie ? 'mdi:heart' : 'mdi:heart-outline'" 
       class="favorite-button__icon"
       width="24"
       height="24"
@@ -22,16 +22,16 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-const { isFavorite } = defineProps<{
-  isFavorite: boolean
+const { isFavoriteMovie } = defineProps<{
+  isFavoriteMovie: boolean
 }>();
 
 const emit = defineEmits<{
-  'update:isFavorite': [value: boolean]
+  'isFavorite': [value: boolean]
 }>();
 
-const toggleFavorite = () => {
-  emit('update:isFavorite', !isFavorite);
+const toggleFavorite = (): void => {
+  emit('isFavorite', !isFavoriteMovie);
 };
 </script>
 
