@@ -38,6 +38,10 @@ const { movie } = defineProps<{
   transition: background-color 0.3s ease;
   align-items: center;
 
+  @media (max-width: 425px) {
+    padding: 4px;
+  }
+
   &:not(:last-child) {
     margin-bottom: 10px;
   }
@@ -52,23 +56,29 @@ const { movie } = defineProps<{
     width: 100%;
     text-align: left;
     margin-left: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   &__item-info {
     display: flex;
     align-items: center;
+    font-weight: 600;
     gap: 10px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
   }
 
   &__item-favorite {
     background-color: transparent;
     border: none;
     cursor: pointer;
-
-    svg {
-      width: 30px;
-      height: 30px;
-    }
+    min-width: 30px;
+    min-height: 30px;
   }
 }
 </style>

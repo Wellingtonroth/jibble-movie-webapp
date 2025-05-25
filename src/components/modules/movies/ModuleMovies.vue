@@ -4,7 +4,7 @@
       <Header />
       <SearchInput 
         v-model="searchQuery" 
-        @search="searchMovies"
+        @search="handleSearch"
       />
     </div>
     <MoviesDisplay />
@@ -22,10 +22,11 @@ const searchQuery = ref<string>('');
 
 const { 
   getAllMovies,
+  searchMovies,
 } = useMovies();
 
-const searchMovies = () => {
-  console.log(searchQuery.value)
+const handleSearch = () => {
+  searchMovies(searchQuery.value);
 };
 
 onMounted(() => {

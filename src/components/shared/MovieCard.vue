@@ -34,15 +34,15 @@ import useFavorites from '@/composables/useFavorites'
 import type { Movie } from '@/types/movie'
 
 const { movie, index } = defineProps<{
-  movie: Movie
-  index: number
+  movie: Movie,
+  index: number,
 }>()
 
 const emit = defineEmits<{
   'toggle-favorite': [movie: Movie]
 }>()
 
-const { isFavorite } = useFavorites()
+const { isFavorite } = useFavorites();
 // const { currentPage } = useMovies()
 
 const isMovieFavorite = computed<boolean>(() => isFavorite(movie.imdbID));

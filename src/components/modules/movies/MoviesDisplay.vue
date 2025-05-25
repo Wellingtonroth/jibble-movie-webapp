@@ -4,14 +4,19 @@
       <button 
         v-for="option in DISPLAY_OPTIONS" 
         :key="option.value" 
-        @click="setDisplayType(option.value)"
+        @click="handleDisplayTypeChange(option.value)"
         :class="{ 'active': displayType === option.value }"
       >
         <Icon :icon="option.icon" width="16" height="16" />
       </button>
     </div>
   </div>
-  <div class="movies-cards" v-if="displayType === 'grid'">
+  <EmptyState
+    v-if="!movies.length"
+    title="No movies found"
+    description="Try searching for a different movie or check your search term"
+  />
+  <div class="movies-cards" v-else-if="displayType === DisplayType.GRID">
     <MovieCard 
       v-for="(movie, index) in movies" 
       :key="movie.imdbID" 
@@ -32,8 +37,9 @@
 <script setup lang="ts">
 import MovieCard from '@/components/shared/MovieCard.vue'
 import MoviesList from '@/components/shared/MoviesList.vue'
+import EmptyState from '@/components/shared/EmptyState.vue'
 import useMovies from '@/composables/useMovies'
-import { DISPLAY_OPTIONS } from '@/constants/display'
+import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display'
 import { Icon } from '@iconify/vue'
 
 const { 
@@ -41,6 +47,10 @@ const {
   displayType,
   setDisplayType,
 } = useMovies();
+
+const handleDisplayTypeChange = (type: DisplayType) => {
+  setDisplayType(type)
+}
 </script>
 
 <style scoped lang="scss">

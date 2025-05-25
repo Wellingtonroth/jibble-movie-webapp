@@ -1,35 +1,32 @@
 <template>
   <div class="search-input">
-    <input
-      type="text"
-      :placeholder="placeholder"
-      class="search-input__field"
-      :value="modelValue"
-      @input="handleInput"
-    />
-    <button
-      class="search-input__button"
-      @click="handleSearch"
-      :disabled="!modelValue"
-    >
-      {{ buttonText }}
-    </button>
+    <div class="search-input__wrapper">
+      <input
+        type="text"
+        class="search-input__field"
+        :placeholder="placeholder"
+        :value="modelValue"
+        @input="handleInput"
+      />
+      <Icon
+        icon="mdi:magnify" 
+        class="search-input__icon"
+        width="20"
+        height="20"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const { 
-  modelValue, 
-  placeholder, 
-  buttonText
-} = withDefaults(defineProps<{
+import { Icon } from '@iconify/vue'
+
+const { modelValue, placeholder } = withDefaults(defineProps<{
   modelValue: string
   placeholder?: string
-  buttonText?: string
 }>(), {
-  placeholder: 'Search movies...',
-  buttonText: 'Search'
-})
+  placeholder: 'Search movies...'
+});
 
 const emit = defineEmits<{
   'search': [],
@@ -39,9 +36,6 @@ const emit = defineEmits<{
 const handleInput = (event: Event) => {
   const value = (event.target as HTMLInputElement).value;
   emit('update:modelValue', value);
-};
-
-const handleSearch = () => {
   emit('search');
 };
 </script>
@@ -51,9 +45,15 @@ const handleSearch = () => {
   display: flex;
   gap: 16px;
 
-  &__field {
+  &__wrapper {
+    position: relative;
     flex: 1;
+  }
+
+  &__field {
+    width: 100%;
     padding: 8px 16px;
+    padding-right: 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
@@ -64,24 +64,12 @@ const handleSearch = () => {
     }
   }
 
-  &__button {
-    padding: 8px 24px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.2s;
-
-    &:hover {
-      background-color: #007bff;
-    }
-
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
+  &__icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
   }
 }
 </style> 

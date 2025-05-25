@@ -1,13 +1,14 @@
 import { computed } from 'vue';
 import { useMoviesStore } from '@/stores/movies'
 import type { Movie } from '@/types/movie'
+import { DisplayType } from '@/constants/display'
 
 export default function useMovies(moviesStore = useMoviesStore()) {
   const movies = computed<Movie[]>(() => moviesStore.movies);
   const totalPages = computed<number>(() => moviesStore.totalPages);
   const currentPage = computed<number>(() => moviesStore.currentPage);
   const isLoading = computed<boolean>(() => moviesStore.isLoading);
-  const displayType = computed<string>(() => moviesStore.moviesDisplayType);
+  const displayType = computed<DisplayType>(() => moviesStore.moviesDisplayType);
 
   const getAllMovies = async (page: number = 1): Promise<void> => {
     try {
@@ -36,7 +37,7 @@ export default function useMovies(moviesStore = useMoviesStore()) {
     }
   };
 
-  const setDisplayType = (type: string): void => {
+  const setDisplayType = (type: DisplayType): void => {
     moviesStore.setDisplayType(type);
   };
 
