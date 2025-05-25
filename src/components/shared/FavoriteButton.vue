@@ -20,10 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
 
 const { isFavoriteMovie } = defineProps<{
-  isFavoriteMovie: boolean
+  isFavoriteMovie: boolean,
 }>();
 
 const emit = defineEmits<{

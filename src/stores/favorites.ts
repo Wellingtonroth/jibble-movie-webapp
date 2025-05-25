@@ -1,10 +1,12 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
-import type { Movie } from '@/types/movie'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import type { Movie } from '@/types/movie';
 
 export const useFavoritesStore = defineStore('favorites', () => {
-  const favorites = ref<Movie[]>([])
-  const isLoading = ref<boolean>(false)
+  const favorites = ref<Movie[]>([]);
+  const isLoading = ref<boolean>(false);
+  const currentPage = ref<number>(1);
+  const totalPages = ref<number>(0);
 
   const toggleFavorite = (movie: Movie) => {
     try {
@@ -22,7 +24,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
     } finally {
       isLoading.value = false
     }
-  }
+  };
 
   const loadFavorites = () => {
     try {
@@ -41,17 +43,19 @@ export const useFavoritesStore = defineStore('favorites', () => {
     } finally {
       isLoading.value = false
     }
-  }
+  };
 
   const isFavorite = (id: string) => {
     return favorites.value.some(movie => movie.imdbID === id)
-  }
+  };
 
   return {
     favorites,
+    currentPage,
+    totalPages,
     isLoading,
     toggleFavorite,
     loadFavorites,
     isFavorite,
-  }
-})
+  };
+});

@@ -3,8 +3,10 @@ import { useFavoritesStore } from '@/stores/favorites'
 import type { Movie } from '@/types/movie'
 
 export default function useFavorites(favoritesStore = useFavoritesStore()) {
-  const favorites = computed<Movie[]>(() => favoritesStore.favorites)
-  const isLoading = computed<boolean>(() => favoritesStore.isLoading)
+  const favorites = computed<Movie[]>(() => favoritesStore.favorites);
+  const isLoading = computed<boolean>(() => favoritesStore.isLoading);
+  const currentPage = computed<number>(() => favoritesStore.currentPage);
+  const totalPages = computed<number>(() => favoritesStore.totalPages);
 
   const loadFavorites = (): void => {
     try {
@@ -13,7 +15,7 @@ export default function useFavorites(favoritesStore = useFavoritesStore()) {
       console.error('Error loading favorites:', error)
       throw error
     }
-  }
+  };
 
   const toggleFavorite = (movie: Movie): void => {
     try {
@@ -22,17 +24,19 @@ export default function useFavorites(favoritesStore = useFavoritesStore()) {
       console.error('Error toggling favorite:', error)
       throw error
     }
-  }
+  };
   
   const isFavorite = (movieId: string): boolean => {
     return favoritesStore.isFavorite(movieId)
-  }
+  };
 
   return {
     favorites,
+    currentPage,
+    totalPages,
     isLoading,
     loadFavorites,
     toggleFavorite,
     isFavorite
-  }
+  };
 };

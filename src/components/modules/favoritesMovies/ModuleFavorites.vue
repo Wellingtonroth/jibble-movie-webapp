@@ -3,14 +3,16 @@
     <div class="movies-section__header">
       <Header />
       <SearchInput 
-        v-model="searchQuery" 
+        v-model="searchQuery"
       />
     </div>
     <MoviesDisplay 
       :data="filteredFavorites" 
       :is-loading="isLoading"
+      :total-pages="totalPages"
+      :current-page="currentPage"
     />
-  </section>    
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -26,6 +28,8 @@ const searchQuery = ref<string>('');
 const { 
   favorites,
   isLoading,
+  totalPages,
+  currentPage,
   loadFavorites,
 } = useFavorites();
 

@@ -19,22 +19,22 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
 
 const { 
   modelValue, 
   placeholder = 'Search movies...',
 } = defineProps<{
-  modelValue: string
-  placeholder?: string
+  modelValue: string,
+  placeholder?: string,
 }>();
 
 const emit = defineEmits<{
+  'update:modelValue': [value: string],
   'search': [],
-  'update:modelValue': [value: string]
 }>();
 
-const handleInput = (event: Event) => {
+const handleInput = (event: Event): void => {
   const value = (event.target as HTMLInputElement).value.trim();
   emit('update:modelValue', value);
   emit('search');

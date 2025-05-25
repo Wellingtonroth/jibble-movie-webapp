@@ -52,29 +52,31 @@
 </template>
 
 <script setup lang="ts">
-import MovieCard from '@/components/shared/MovieCard.vue'
-import MoviesList from '@/components/shared/MoviesList.vue'
-import EmptyState from '@/components/shared/EmptyState.vue'
-import LoadingSpinner from '@/components/shared/LoadingSpinner.vue'
-import Pagination from '@/components/shared/Pagination.vue'
-import useMovies from '@/composables/useMovies'
-import useFavorites from '@/composables/useFavorites'
-import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display'
-import { Icon } from '@iconify/vue'
-import type { Movie } from '@/types/movie'
+import MovieCard from '@/components/shared/MovieCard.vue';
+import MoviesList from '@/components/shared/MoviesList.vue';
+import EmptyState from '@/components/shared/EmptyState.vue';
+import LoadingSpinner from '@/components/shared/LoadingSpinner.vue';
+import Pagination from '@/components/shared/Pagination.vue';
+import useMovies from '@/composables/useMovies';
+import useFavorites from '@/composables/useFavorites';
+import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display';
+import { Icon } from '@iconify/vue';
+import type { Movie } from '@/types/movie';
 
 const { 
   data, 
-  isLoading, 
+  isLoading,
+  totalPages,
+  currentPage,
 } = defineProps<{
   data: Movie[],
   isLoading: boolean,
+  totalPages: number,
+  currentPage: number,
 }>();
 
 const { 
   displayType,
-  currentPage,
-  totalPages,
   setDisplayType,
   setCurrentPage,
 } = useMovies();
@@ -83,15 +85,15 @@ const {
   toggleFavorite,
 } = useFavorites();
 
-const handleDisplayTypeChange = (type: DisplayType) => {
-  setDisplayType(type)
+const handleDisplayTypeChange = (type: DisplayType): void => {
+  setDisplayType(type);
 };
 
-const handleToggleFavorite = (movie: Movie) => {
-  toggleFavorite(movie)
+const handleToggleFavorite = (movie: Movie): void => {
+  toggleFavorite(movie);
 };
 
-const handleCurrentPageChange = (page: number) => {
+const handleCurrentPageChange = (page: number): void => {
   setCurrentPage(page);
 };
 </script>

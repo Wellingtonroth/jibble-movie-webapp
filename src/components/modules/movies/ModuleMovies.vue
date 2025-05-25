@@ -9,6 +9,8 @@
     </div>
     <MoviesDisplay 
       :data="movies"
+      :total-pages="totalPages"
+      :current-page="currentPage"
       :is-loading="isLoading"
     />
   </section>    
@@ -28,23 +30,32 @@ const {
   movies,
   isLoading,
   currentPage,
-  getAllMovies,
+  totalPages,
+  getMovies,
   searchMovies,
 } = useMovies();
 
 const { loadFavorites } = useFavorites();
 
-const handleSearch = () => {
-  searchMovies(searchQuery.value);
+const handleSearch = async (): Promise<void> => {
+  if (searchQuery.value) {  
+    await searchMovies(searchQuery.value);
+  } else {
+    await getMovies(currentPage.value);
+  }
 };
 
-watch(currentPage, () => {
-  getAllMovies(currentPage.value);
+watch(currentPage, async (newPage: number): Promise<void> => {
+  if (searchQuery.value) {
+    await searchMovies(searchQuery.value, newPage);
+  } else {
+    await getMovies(newPage);
+  }
 });
 
-onMounted(() => {
-  getAllMovies(currentPage.value);
-  loadFavorites();
+onMounted(async (): Promise<void> => {
+  await getMovies(currentPage.value);
+  await loadFavorites();
 });
 </script>
 

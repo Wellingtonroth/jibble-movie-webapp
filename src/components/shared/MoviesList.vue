@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import FavoriteButton from './FavoriteButton.vue'
-import useFavorites from '@/composables/useFavorites'
-import type { Movie } from '@/types/movie'
+import { computed } from 'vue';
+import FavoriteButton from './FavoriteButton.vue';
+import useFavorites from '@/composables/useFavorites';
+import type { Movie } from '@/types/movie';
 
 const { movie } = defineProps<{
   movie: Movie

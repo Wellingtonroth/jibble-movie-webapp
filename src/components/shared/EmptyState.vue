@@ -16,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
+import { Icon } from '@iconify/vue';
 
-const { title, description } = defineProps<{
-  title?: string
-  description?: string
+const { title = 'Loading...', description = 'Please wait...' } = defineProps<{
+  title?: string,
+  description?: string,
 }>();
 </script>
 

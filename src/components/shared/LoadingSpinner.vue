@@ -14,7 +14,6 @@
 </template>
 
 <script setup lang="ts">
-
 const { message, overlay } = defineProps<{
   message: string,
   overlay: boolean,

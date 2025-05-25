@@ -10,9 +10,9 @@ export default function useMovies(moviesStore = useMoviesStore()) {
   const isLoading = computed<boolean>(() => moviesStore.isLoading);
   const displayType = computed<DisplayType>(() => moviesStore.moviesDisplayType);
 
-  const getAllMovies = async (page: number = 1): Promise<void> => {
+  const getMovies = async (page: number = 1): Promise<void> => {
     try {
-      await moviesStore.getAllMovies(page)
+      await moviesStore.getMovies(page)
     } catch (error) {
       console.error('Error fetching all movies:', error)
       throw error
@@ -24,15 +24,6 @@ export default function useMovies(moviesStore = useMoviesStore()) {
       await moviesStore.searchMovies(title, page)
     } catch (error) {
       console.error('Error searching movies:', error)
-      throw error
-    }
-  };
-
-  const getMoviesByYear = async (year: number, page: number = 1): Promise<void> => {
-    try {
-      await moviesStore.getMoviesByYear(year, page)
-    } catch (error) {
-      console.error('Error fetching movies by year:', error)
       throw error
     }
   };
@@ -51,10 +42,9 @@ export default function useMovies(moviesStore = useMoviesStore()) {
     currentPage,
     displayType,
     isLoading,
-    getAllMovies,
+    getMovies,
     searchMovies,
-    getMoviesByYear,
     setDisplayType,
     setCurrentPage,
-  }
+  };
 };
