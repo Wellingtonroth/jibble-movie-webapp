@@ -1,85 +1,65 @@
 <template>
   <div class="pagination">
-    <button 
-      class="pagination__button"
-      :class="{ 'pagination__button--disabled': currentPage === 1 }"
-      @click="goToFirstPage" 
-      :disabled="currentPage === 1"
-    >
-      <Icon icon="mdi:chevron-double-left" width="20" height="20" />
-    </button>
+    <PaginationButton
+      icon="mdi:chevron-double-left"
+      :disabled="isFirstPage"
+      @click="goToFirstPage"
+    />
+    <PaginationButton
+      icon="mdi:chevron-left"
+      :disabled="isFirstPage"
+      @click="prevPage"
+    />
 
-    <button 
-      class="pagination__button"
-      :class="{ 'pagination__button--disabled': currentPage === 1 }"
-      @click="prevPage" 
-      :disabled="currentPage === 1"
-    >
-      <Icon icon="mdi:chevron-left" width="20" height="20" />
-      Previous
-    </button>
-
-    <div class="pagination__pages">
+    <div class="pagination__pages" aria-label="Current page indicator">
       <span class="pagination__current">{{ currentPage }}</span>
       <span class="pagination__separator">/</span>
       <span class="pagination__total">{{ totalPages }}</span>
     </div>
 
-    <button 
-      class="pagination__button"
-      :class="{ 'pagination__button--disabled': currentPage === totalPages }"
-      @click="nextPage" 
-      :disabled="currentPage === totalPages"
-    >
-      Next
-      <Icon icon="mdi:chevron-right" width="20" height="20" />
-    </button>
-
-    <button 
-      class="pagination__button"
-      :class="{ 'pagination__button--disabled': currentPage === totalPages }"
-      @click="goToLastPage" 
-      :disabled="currentPage === totalPages"
-    >
-      <Icon icon="mdi:chevron-double-right" width="20" height="20" />
-    </button>
+    <PaginationButton
+      icon="mdi:chevron-right"
+      :disabled="isLastPage"
+      @click="nextPage"
+    />
+    <PaginationButton
+      icon="mdi:chevron-double-right"
+      :disabled="isLastPage"
+      @click="goToLastPage"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
+import { computed } from 'vue'
+import PaginationButton from '@/components/shared/PaginationButton.vue'
 
 const { currentPage, totalPages } = defineProps<{
-  currentPage: number,
-  totalPages: number,
-}>();
+  currentPage: number
+  totalPages: number
+}>()
 
 const emit = defineEmits<{
   'currentPage': [value: number],
 }>();
 
+const isFirstPage = computed<boolean>(() => currentPage === 1);
+const isLastPage = computed<boolean>(() => currentPage === totalPages);
+
 const goToFirstPage = (): void => {
-  if (currentPage > 1) {
-    emit('currentPage', 1);
-  }
+  if (!isFirstPage.value) emit('currentPage', 1);
 };
 
 const prevPage = (): void => {
-  if (currentPage > 1) {
-    emit('currentPage', currentPage - 1);
-  }
+  if (!isFirstPage.value) emit('currentPage', currentPage - 1);
 };
 
 const nextPage = (): void => {
-  if (currentPage < totalPages) {
-    emit('currentPage', currentPage + 1);
-  }
+  if (!isLastPage.value) emit('currentPage', currentPage + 1);
 };
 
 const goToLastPage = (): void => {
-  if (currentPage < totalPages) {
-    emit('currentPage', totalPages);
-  }
+  if (!isLastPage.value) emit('currentPage', totalPages);
 };
 </script>
 
