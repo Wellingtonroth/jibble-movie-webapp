@@ -20,12 +20,18 @@
     />
   </div>
   <div class="movies-list" v-else>
-    modo lista
+    <MoviesList 
+      v-for="(movie, index) in movies" 
+      :key="movie.imdbID" 
+      :movie="movie"
+      :index="index"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import MovieCard from '@/components/shared/MovieCard.vue'
+import MoviesList from '@/components/shared/MoviesList.vue'
 import useMovies from '@/composables/useMovies'
 import { DISPLAY_OPTIONS } from '@/constants/display'
 import { Icon } from '@iconify/vue'

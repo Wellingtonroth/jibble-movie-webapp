@@ -21,7 +21,6 @@ import useMovies from '@/composables/useMovies'
 const searchQuery = ref<string>('');
 
 const { 
-  movies, 
   getAllMovies,
 } = useMovies();
 

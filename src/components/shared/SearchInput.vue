@@ -60,13 +60,13 @@ const handleSearch = () => {
 
     &:focus {
       outline: none;
-      border-color: #42b883;
+      border-color: #007bff;
     }
   }
 
   &__button {
     padding: 8px 24px;
-    background-color: #42b883;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
@@ -75,7 +75,7 @@ const handleSearch = () => {
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #3aa876;
+      background-color: #007bff;
     }
 
     &:disabled {
