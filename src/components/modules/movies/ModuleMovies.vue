@@ -9,6 +9,7 @@
     </div>
     <MoviesDisplay 
       :data="movies"
+      :is-loading="isLoading"
     />
   </section>    
 </template>
@@ -25,6 +26,7 @@ const searchQuery = ref<string>('');
 
 const { 
   movies,
+  isLoading,
   getAllMovies,
   searchMovies,
 } = useMovies();

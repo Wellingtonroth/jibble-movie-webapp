@@ -8,9 +8,14 @@
       {{ movie.Title }}
     </h3>
     <div class="movies-list__item-info">
-      <p class="movies-list__item-year">
-        {{ movie.Year }}
-      </p>
+      <div class="movies-list__item-info-container">
+        <span class="movies-list__item-id">
+          id: {{ movie.imdbID }}
+        </span>
+        <span class="movies-list__item-year">
+          {{ movie.Year }}
+        </span>
+      </div>
       <FavoriteButton
         :is-favorite-movie="isFavoriteMovie"
         @isFavorite="handleToggleFavorite(movie)"
@@ -85,12 +90,25 @@ const handleToggleFavorite = (movie: Movie): void => {
     }
   }
 
+  &__item-info-container {
+    display: flex;
+  }
+
   &__item-year {
     font-size: 14px;
     font-weight: 600;
     color: #666;
     padding-bottom: 2px;
     border-bottom: 1px solid #666;
+    cursor: default;
   } 
+
+  &__item-id {
+    font-size: 13px;
+    color: #666;
+    width: max-content;
+    margin-right: 10px;
+    cursor: default;
+  }
 }
 </style>

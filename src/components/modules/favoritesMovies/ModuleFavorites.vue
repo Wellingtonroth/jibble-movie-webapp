@@ -9,6 +9,7 @@
     </div>
     <MoviesDisplay 
       :data="favorites" 
+      :is-loading="isLoading"
     />
   </section>    
 </template>
@@ -26,8 +27,6 @@ const {
   favorites,
   isLoading,
   loadFavorites,
-  toggleFavorite,
-  isFavorite,
 } = useFavorites();
 
 const handleSearch = () => {

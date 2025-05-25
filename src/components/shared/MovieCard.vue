@@ -16,9 +16,14 @@
       <h3 class="movie-card__title">
         {{ movie.Title }}
       </h3>
-      <p class="movie-card__year">
-        {{ movie.Year }}
-      </p>
+      <div class="movie-card__info-container">
+        <span class="movie-card__year">
+          {{ movie.Year }}
+        </span>
+        <span class="movie-card__id">
+          id: {{ movie.imdbID }}
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -94,6 +99,18 @@ const handleToggleFavorite = (movie: Movie): void => {
     border-bottom: 1px solid #666;
     width: fit-content;
     cursor: default;
+  }
+
+  &__id {
+    font-size: 13px;
+    color: #666;
+    cursor: default;
+  }
+
+  &__info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 }
 </style> 

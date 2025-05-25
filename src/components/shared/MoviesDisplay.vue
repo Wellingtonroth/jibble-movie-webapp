@@ -10,28 +10,37 @@
         <Icon :icon="option.icon" width="16" height="16" />
       </button>
     </div>
-  </div>
-  <EmptyState
-    v-if="!data.length"
-    title="No movies found"
-    description="Try searching for a different movie or check your search term"
-  />
-  <div class="movies-cards" v-else-if="displayType === DisplayType.GRID">
-    <MovieCard 
-      v-for="(movie, index) in data" 
-      :key="movie.imdbID" 
-      :movie="movie"
-      :index="index"
-      @toggle-favorite="handleToggleFavorite"
+
+    <LoadingSpinner 
+      v-if="isLoading" 
+      message="Loading movies..."
+      :overlay="true"
     />
-  </div>
-  <div class="movies-list" v-else>
-    <MoviesList 
-      v-for="(movie, index) in data" 
-      :key="movie.imdbID" 
-      :movie="movie"
-      :index="index"
-    />
+
+    <div v-else>
+      <EmptyState
+        v-if="!data.length"
+        title="No movies found"
+        description="Try searching for a different movie or check your search term"
+      />
+      <div class="movies-cards" v-else-if="displayType === DisplayType.GRID">
+        <MovieCard 
+          v-for="(movie, index) in data" 
+          :key="movie.imdbID" 
+          :movie="movie"
+          :index="index"
+          @toggle-favorite="handleToggleFavorite"
+        />
+      </div>
+      <div class="movies-list" v-else>
+        <MoviesList 
+          v-for="(movie, index) in data" 
+          :key="movie.imdbID" 
+          :movie="movie"
+          :index="index"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -39,14 +48,16 @@
 import MovieCard from '@/components/shared/MovieCard.vue'
 import MoviesList from '@/components/shared/MoviesList.vue'
 import EmptyState from '@/components/shared/EmptyState.vue'
+import LoadingSpinner from '@/components/shared/LoadingSpinner.vue'
 import useMovies from '@/composables/useMovies'
 import useFavorites from '@/composables/useFavorites'
 import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display'
 import { Icon } from '@iconify/vue'
 import type { Movie } from '@/types/movie'
 
-const { data } = defineProps<{
+const { data, isLoading } = defineProps<{
   data: Movie[],
+  isLoading: boolean,
 }>();
 
 const { 
@@ -68,6 +79,10 @@ const handleToggleFavorite = (movie: Movie) => {
 </script>
 
 <style scoped lang="scss">
+.movies-display {
+  width: 100%;
+}
+
 .movies-cards {
   display: flex;
   justify-content: center;
