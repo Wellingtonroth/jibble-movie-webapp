@@ -22,6 +22,7 @@
       :key="movie.imdbID" 
       :movie="movie"
       :index="index"
+      @toggle-favorite="handleToggleFavorite"
     />
   </div>
   <div class="movies-list" v-else>
@@ -39,8 +40,10 @@ import MovieCard from '@/components/shared/MovieCard.vue'
 import MoviesList from '@/components/shared/MoviesList.vue'
 import EmptyState from '@/components/shared/EmptyState.vue'
 import useMovies from '@/composables/useMovies'
+import useFavorites from '@/composables/useFavorites'
 import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display'
 import { Icon } from '@iconify/vue'
+import type { Movie } from '@/types/movie'
 
 const { 
   movies,
@@ -48,9 +51,17 @@ const {
   setDisplayType,
 } = useMovies();
 
+const { 
+  toggleFavorite,
+} = useFavorites();
+
 const handleDisplayTypeChange = (type: DisplayType) => {
   setDisplayType(type)
-}
+};
+
+const handleToggleFavorite = (movie: Movie) => {
+  toggleFavorite(movie)
+};
 </script>
 
 <style scoped lang="scss">
