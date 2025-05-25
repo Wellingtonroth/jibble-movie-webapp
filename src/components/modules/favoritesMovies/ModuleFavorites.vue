@@ -4,22 +4,22 @@
       <Header />
       <SearchInput 
         v-model="searchQuery" 
-        @search="handleSearch"
       />
     </div>
     <MoviesDisplay 
-      :data="favorites" 
+      :data="filteredFavorites" 
       :is-loading="isLoading"
     />
   </section>    
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
 import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
 import useFavorites from '@/composables/useFavorites'
+import type { Movie } from '@/types/movie'
 
 const searchQuery = ref<string>('');
 
@@ -29,10 +29,14 @@ const {
   loadFavorites,
 } = useFavorites();
 
-const handleSearch = () => {
-  // searchMovies(searchQuery.value);
-  console.log("entrei");
-};
+const filteredFavorites = computed<Movie[]>(() => {
+  if (!searchQuery.value) return favorites.value;
+  
+  const query = searchQuery.value.toLowerCase();
+  return favorites.value.filter((movie: Movie) => 
+    movie.Title.toLowerCase().includes(query)
+  );
+});
 
 onMounted(() => {
   loadFavorites()
