@@ -67,9 +67,11 @@ const handleToggleFavorite = (movie: Movie): void => {
     width: 100%;
     text-align: left;
     margin-left: 20px;
+    margin-right: 4px;
 
     @media (max-width: 768px) {
       font-size: 14px;
+      margin-left: 10px;
     }
   }
 
