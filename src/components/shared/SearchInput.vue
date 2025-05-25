@@ -21,12 +21,13 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-const { modelValue, placeholder } = withDefaults(defineProps<{
+const { 
+  modelValue, 
+  placeholder = 'Search movies...',
+} = defineProps<{
   modelValue: string
   placeholder?: string
-}>(), {
-  placeholder: 'Search movies...'
-});
+}>();
 
 const emit = defineEmits<{
   'search': [],
@@ -34,7 +35,7 @@ const emit = defineEmits<{
 }>();
 
 const handleInput = (event: Event) => {
-  const value = (event.target as HTMLInputElement).value;
+  const value = (event.target as HTMLInputElement).value.trim();
   emit('update:modelValue', value);
   emit('search');
 };

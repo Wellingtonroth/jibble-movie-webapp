@@ -65,6 +65,10 @@ export const useMoviesStore = defineStore('movies', () => {
     moviesDisplayType.value = type;
   };
 
+  const setCurrentPage = (page: number) => {
+    currentPage.value = page;
+  };
+
   return {
     movies,
     totalPages,
@@ -75,5 +79,6 @@ export const useMoviesStore = defineStore('movies', () => {
     searchMovies,
     getMoviesByYear,
     setDisplayType,
+    setCurrentPage,
   }
 })

@@ -41,6 +41,10 @@ export default function useMovies(moviesStore = useMoviesStore()) {
     moviesStore.setDisplayType(type);
   };
 
+  const setCurrentPage = (page: number): void => {
+    moviesStore.setCurrentPage(page);
+  };
+
   return {
     movies,
     totalPages,
@@ -51,5 +55,6 @@ export default function useMovies(moviesStore = useMoviesStore()) {
     searchMovies,
     getMoviesByYear,
     setDisplayType,
+    setCurrentPage,
   }
 };

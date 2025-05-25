@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
 import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
@@ -27,6 +27,7 @@ const searchQuery = ref<string>('');
 const { 
   movies,
   isLoading,
+  currentPage,
   getAllMovies,
   searchMovies,
 } = useMovies();
@@ -37,8 +38,12 @@ const handleSearch = () => {
   searchMovies(searchQuery.value);
 };
 
+watch(currentPage, () => {
+  getAllMovies(currentPage.value);
+});
+
 onMounted(() => {
-  getAllMovies();
+  getAllMovies(currentPage.value);
   loadFavorites();
 });
 </script>
