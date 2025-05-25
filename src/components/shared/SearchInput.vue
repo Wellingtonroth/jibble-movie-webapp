@@ -50,7 +50,6 @@ const handleSearch = () => {
 .search-input {
   display: flex;
   gap: 16px;
-  margin-bottom: 32px;
 
   &__field {
     flex: 1;

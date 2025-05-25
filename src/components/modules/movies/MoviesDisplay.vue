@@ -40,6 +40,7 @@ const {
 <style scoped lang="scss">
 .movies-cards {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -47,7 +48,7 @@ const {
 .movies-display__header {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin: 30px 0;
 
   button {
     padding: 6px 10px;
@@ -61,6 +62,4 @@ const {
     color: #fff;
   }
 }
-
-
 </style>

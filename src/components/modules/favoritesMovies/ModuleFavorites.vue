@@ -1,24 +1,53 @@
 <template>
-  <section>
-    <h1>Favorites</h1>
-    <SearchInput 
-      v-model="searchQuery" 
-      @search="searchMovies"
-    />
+  <section class="favorites-movies-section">
+    <div class="favorites-movies-section__header">
+      <Header />
+      <SearchInput 
+        v-model="searchQuery" 
+        @search="searchMovies"
+      />
+    </div>
+    <MoviesDisplay />
   </section>    
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
+import MoviesDisplay from '@/components/modules/movies/MoviesDisplay.vue'
+import Header from '@/components/shared/Header.vue'
+import useMovies from '@/composables/useMovies'
 
-const searchQuery = ref('')
+const searchQuery = ref<string>('');
+
+const { 
+  movies, 
+  getAllMovies,
+} = useMovies();
 
 const searchMovies = () => {
   console.log(searchQuery.value)
-}
+};
+
+onMounted(() => {
+  getAllMovies()
+})
 </script>
 
 <style scoped lang="scss">
+.favorites-movies-section {
+  padding: 20px;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+}
 </style>

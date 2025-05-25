@@ -1,10 +1,12 @@
 <template>
   <section class="movies-section">
-    <h1>Movies</h1>
-    <SearchInput 
-      v-model="searchQuery" 
-      @search="searchMovies"
-    />
+    <div class="movies-section__header">
+      <Header />
+      <SearchInput 
+        v-model="searchQuery" 
+        @search="searchMovies"
+      />
+    </div>
     <MoviesDisplay />
   </section>    
 </template>
@@ -13,6 +15,7 @@
 import { ref, onMounted } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
 import MoviesDisplay from '@/components/modules/movies/MoviesDisplay.vue'
+import Header from '@/components/shared/Header.vue'
 import useMovies from '@/composables/useMovies'
 
 const searchQuery = ref<string>('');
@@ -34,5 +37,17 @@ onMounted(() => {
 <style scoped lang="scss">
 .movies-section {
   padding: 20px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
 }
 </style>
