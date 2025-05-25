@@ -109,13 +109,16 @@ const handleToggleFavorite = (): void => {
     color: #666;
     font-size: 13px;
     font-weight: 600;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #666;
+    width: fit-content;
     cursor: default;
   }
 
   &__favorite {
     width: 100%;
     padding: 8px;
-    background-color: #dbec3a;
+    background-color: #e9ff1a;
     color: #111;
     border: none;
     border-radius: 4px;
@@ -125,7 +128,7 @@ const handleToggleFavorite = (): void => {
     transition: background-color 0.2s;
 
     &:hover {
-      background-color: #ddf032;
+      background-color: #e7ff00;
     }
 
     &--active {

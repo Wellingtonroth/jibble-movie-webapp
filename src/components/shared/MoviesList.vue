@@ -65,13 +65,20 @@ const { movie } = defineProps<{
   &__item-info {
     display: flex;
     align-items: center;
-    font-weight: 600;
     gap: 10px;
 
     @media (max-width: 768px) {
       font-size: 14px;
     }
   }
+
+  &__item-year {
+    font-size: 14px;
+    font-weight: 600;
+    color: #666;
+    padding-bottom: 2px;
+    border-bottom: 1px solid #666;
+  } 
 
   &__item-favorite {
     background-color: transparent;
