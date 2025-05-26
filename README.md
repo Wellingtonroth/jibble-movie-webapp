@@ -29,7 +29,6 @@ A modern Vue.js web application for exploring and discovering movies. Built with
 ## 📦 Prerequisites
 
 - Node.js (Latest LTS version recommended)
-- npm or yarn package manager
 
 ## 🚀 Getting Started
 
@@ -42,15 +41,11 @@ cd jibble-movie-webapp
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
 3. Start the development server:
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 4. Open your browser and visit `http://localhost:5173`
@@ -69,6 +64,26 @@ src/
 ├── stores/               # Pinia stores
 ├── types/                # TypeScript type definitions
 └── views/                # Page views
+```
+
+## 🧪 Testing
+
+The project uses a comprehensive testing strategy with both unit tests and end-to-end tests:
+
+### Unit Testing with Vitest
+- Uses Vitest as the testing framework
+- Tests are written in TypeScript
+- JSDOM environment for DOM testing
+- Test files are located in `src/**/*.{test,spec}.{js,ts,jsx,tsx}`
+- Run unit tests with:
+```bash
+npm run test
+# or
+npm run test-ui
+# or
+npm run test-cover
+# or
+npm run test-cover-ui
 ```
 
 ## 🤝 Contributing
