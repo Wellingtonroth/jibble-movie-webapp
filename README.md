@@ -23,7 +23,6 @@ A modern Vue.js web application for exploring and discovering movies. Built with
 - **Styling:** SASS
 - **Testing:**
   - Unit Testing: Vitest
-  - E2E Testing: Cypress
 - **Icons:** Iconify
 
 ## 📦 Prerequisites
