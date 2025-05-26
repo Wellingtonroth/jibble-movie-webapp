@@ -4,10 +4,10 @@ import type { Movie } from '@/types/movie';
 
 export const useFavoritesStore = defineStore('favorites', () => {
   const favorites = ref<Movie[]>([]);
-  const isLoading = ref<boolean>(false);
   const favoritesCurrentPage = ref<number>(1);
   const totalPages = ref<number>(0);
   const itemsPerPage = ref<number>(10);
+  const isLoading = ref<boolean>(false);
 
   const loadFavorites = (): void => {
     try {
