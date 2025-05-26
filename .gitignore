@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # Testing
-/cypress/videos/
-/cypress/screenshots/
+/coverage/
