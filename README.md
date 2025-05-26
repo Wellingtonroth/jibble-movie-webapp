@@ -66,11 +66,7 @@ src/
 └── views/                # Page views
 ```
 
-## 🧪 Testing
-
-The project uses a comprehensive testing strategy with both unit tests and end-to-end tests:
-
-### Unit Testing with Vitest
+### 🧪 Unit Testing with Vitest
 - Uses Vitest as the testing framework
 - Tests are written in TypeScript
 - JSDOM environment for DOM testing
