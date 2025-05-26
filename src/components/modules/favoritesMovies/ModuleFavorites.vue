@@ -7,16 +7,16 @@
       />
     </div>
     <MoviesDisplay 
-      :data="filteredFavorites" 
-      :is-loading="isLoading"
+      :data="paginatedFavorites" 
       :total-pages="totalPages"
-      :current-page="currentPage"
+      :current-page="favoritesCurrentPage"
+      :is-loading="isLoading"
     />
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import SearchInput from '@/components/shared/SearchInput.vue'
 import MoviesDisplay from '@/components/shared/MoviesDisplay.vue'
 import Header from '@/components/shared/Header.vue'
@@ -29,8 +29,10 @@ const {
   favorites,
   isLoading,
   totalPages,
-  currentPage,
+  favoritesCurrentPage,
+  itemsPerPage,
   loadFavorites,
+  setTotalPages,
 } = useFavorites();
 
 const filteredFavorites = computed<Movie[]>(() => {
@@ -40,6 +42,17 @@ const filteredFavorites = computed<Movie[]>(() => {
   return favorites.value.filter((movie: Movie) => 
     movie.Title.toLowerCase().includes(query)
   );
+});
+
+const paginatedFavorites = computed<Movie[]>(() => {
+  const start = (favoritesCurrentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return filteredFavorites.value.slice(start, end);
+});
+
+watch(filteredFavorites, (): void => {
+  const total = Math.ceil(filteredFavorites.value.length / itemsPerPage.value);
+  setTotalPages(total || 1);
 });
 
 onMounted(() => {

@@ -11,7 +11,7 @@ export const useMoviesStore = defineStore('movies', () => {
   const moviesDisplayType = ref<DisplayType>(DisplayType.GRID);
   const isLoading = ref<boolean>(false);
 
-  const getMovies = async (page: number = 1) => {
+  const getMovies = async (page: number = 1): Promise<void> => {
     try {
       isLoading.value = true
       const response = await movieService.getMovies(page)
@@ -26,7 +26,7 @@ export const useMoviesStore = defineStore('movies', () => {
     }
   };
 
-  const searchMovies = async (title: string, page: number = 1) => {
+  const searchMovies = async (title: string, page: number = 1): Promise<void> => {
     try {
       isLoading.value = true
       const response = await movieService.searchMovies(title, page)
@@ -41,11 +41,11 @@ export const useMoviesStore = defineStore('movies', () => {
     }
   };
 
-  const setDisplayType = (type: DisplayType) => {
+  const setDisplayType = (type: DisplayType): void => {
     moviesDisplayType.value = type;
   };
 
-  const setCurrentPage = (page: number) => {
+  const setCurrentPage = (page: number): void => {
     currentPage.value = page;
   };
 

@@ -12,19 +12,19 @@ export default function useMovies(moviesStore = useMoviesStore()) {
 
   const getMovies = async (page: number = 1): Promise<void> => {
     try {
-      await moviesStore.getMovies(page)
+      await moviesStore.getMovies(page);
     } catch (error) {
-      console.error('Error fetching all movies:', error)
-      throw error
+      console.error('Error fetching all movies:', error);
+      throw error;
     }
   };
 
   const searchMovies = async (title: string, page: number = 1): Promise<void> => {
     try {
-      await moviesStore.searchMovies(title, page)
+      await moviesStore.searchMovies(title, page);
     } catch (error) {
-      console.error('Error searching movies:', error)
-      throw error
+      console.error('Error searching movies:', error);
+      throw error;
     }
   };
 

@@ -62,6 +62,7 @@ import useFavorites from '@/composables/useFavorites';
 import { DISPLAY_OPTIONS, DisplayType } from '@/constants/display';
 import { Icon } from '@iconify/vue';
 import type { Movie } from '@/types/movie';
+import { useRoute } from 'vue-router';
 
 const { 
   data, 
@@ -81,7 +82,10 @@ const {
   setCurrentPage,
 } = useMovies();
 
-const { 
+const route = useRoute();
+
+const {
+  setFavoritesCurrentPage,
   toggleFavorite,
 } = useFavorites();
 
@@ -94,7 +98,11 @@ const handleToggleFavorite = (movie: Movie): void => {
 };
 
 const handleCurrentPageChange = (page: number): void => {
-  setCurrentPage(page);
+  if (route.name === 'FavoritesView') {
+    setFavoritesCurrentPage(page);
+  } else {
+    setCurrentPage(page);
+  }
 };
 </script>
 
